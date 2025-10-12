@@ -36,6 +36,14 @@ const Movies = () => {
 
   return (
     <div className="container mx-auto p-6 mt-10 bg-[#132440] text-white shadow-md rounded-xl">
+      <div className="flex  items-center gap-2 text-gray-300 mb-8 text-sm">
+        <p className="flex cursor-auto items-center gap-1 hover:text-blue-400 transition">
+          <span>Movies</span>
+        </p>
+
+        <span className="text-gray-500">/</span>
+      </div>
+
       <h1 className="text-4xl font-bold mb-8 text-center tracking-tight">
         Popular Movies
       </h1>
