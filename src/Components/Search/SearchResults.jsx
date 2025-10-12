@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function SearchResults() {
   const { query } = useParams();
   const [movies, setMovies] = useState([]);
+  const navigate = useNavigate();
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
   useEffect(() => {
     axios
@@ -15,8 +16,39 @@ export default function SearchResults() {
       .catch((err) => console.log(err));
   }, [query]);
 
+  const handleBack = () => navigate(`/movies`);
+
   return (
     <div className="pt-24 px-6 sm:px-10 bg-gray-900 min-h-screen text-white">
+      <div className="flex  items-center gap-2 text-gray-300 mb-8 text-sm">
+        <button
+          onClick={handleBack}
+          className="flex items-center gap-1 hover:text-blue-400 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span>Movies</span>
+        </button>
+
+        <span className="text-gray-500">/</span>
+        <span className="text-blue-400 font-medium truncate max-w-[200px]">
+          {/* {movies?.title || "Search"} */}
+          {query || "Search"}
+        </span>
+      </div>
+
       <h2 className="text-2xl font-semibold mb-8">
         Results for <span className="text-blue-400">"{query}"</span>
       </h2>
