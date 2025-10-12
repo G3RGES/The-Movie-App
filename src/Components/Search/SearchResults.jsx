@@ -16,13 +16,13 @@ export default function SearchResults() {
       .catch((err) => console.log(err));
   }, [query]);
 
-  const handleBack = () => navigate(`/movies`);
-
+  const handleBackToMovies = () => navigate(`/movies`);
+  const handleback = () => navigate(-1);
   return (
     <div className="pt-24 px-6 sm:px-10 bg-gray-900 min-h-screen text-white">
       <div className="flex  items-center gap-2 text-gray-300 mb-8 text-sm">
         <button
-          onClick={handleBack}
+          onClick={handleBackToMovies}
           className="flex items-center gap-1 hover:text-blue-400 transition"
         >
           <svg
@@ -40,6 +40,29 @@ export default function SearchResults() {
             />
           </svg>
           <span>Movies</span>
+        </button>
+
+        <span className="text-gray-500">/</span>
+
+        <button
+          onClick={handleback}
+          className="flex items-center gap-1 hover:text-blue-400 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span>Back</span>
         </button>
 
         <span className="text-gray-500">/</span>
