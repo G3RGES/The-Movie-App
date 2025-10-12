@@ -8,6 +8,7 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const total_pages = 20;
 
   useEffect(() => {
     axios
@@ -16,7 +17,10 @@ const Movies = () => {
       )
       .then((res) => {
         setMovies(res.data.results);
-        setTotalPages(Math.min(res.data.total_pages, 20));
+        console.log(res.data);
+
+        // setTotalPages(Math.min(res.data.total_pages, 20));
+        setTotalPages(total_pages);
         // console.log(res.data.results);
       })
       .catch((err) => {
@@ -25,7 +29,7 @@ const Movies = () => {
   }, [page]);
 
   const nextPage = () => {
-    if (page < totalPages) setPage((prev) => prev + 1);
+    if (page < total_pages) setPage((prev) => prev + 1);
   };
 
   const prevPage = () => {
@@ -58,12 +62,12 @@ const Movies = () => {
         </button>
 
         <span className="text-lg font-medium">
-          Page {page} of {totalPages}
+          Page {page} of {total_pages}
         </span>
 
         <button
           onClick={nextPage}
-          disabled={page === totalPages}
+          disabled={page === total_pages}
           className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 disabled:opacity-40"
         >
           {">>"}
