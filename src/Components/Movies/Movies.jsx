@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Movie from "./Movie";
+import { useNavigate } from "react-router-dom";
 
 const Movies = () => {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
@@ -34,14 +35,38 @@ const Movies = () => {
     if (page > 1) setPage((prev) => prev - 1);
   };
 
+  const navigate = useNavigate();
+
+  const handleBack = () => navigate(`/`);
+
   return (
     <div className="container mx-auto p-6 mt-10 bg-[#132440] text-white shadow-md rounded-xl">
-      <div className="flex  items-center gap-2 text-gray-300 mb-8 text-sm">
-        <p className="flex cursor-auto items-center gap-1 hover:text-blue-400 transition">
-          <span>Movies</span>
-        </p>
+      <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
+        <button
+          onClick={handleBack}
+          className="flex items-center gap-1 hover:text-blue-400 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span>Home</span>
+        </button>
 
         <span className="text-gray-500">/</span>
+        <span className="text-blue-400 font-medium truncate max-w-[200px]">
+          Movies
+        </span>
       </div>
 
       <h1 className="text-4xl font-bold mb-8 text-center tracking-tight">
