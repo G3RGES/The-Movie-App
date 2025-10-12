@@ -35,9 +35,17 @@ const Movies = () => {
   };
 
   return (
-    <div className="container mx-auto my-auto p-6 mt-10 bg-[#132440] text-white shadow-md">
-      <h1 className="text-4xl font-bold mb-5">Popular Movies</h1>
-      <ul className="grid grid-cols-4 gap-4">
+    <div className="container mx-auto p-6 mt-10 bg-[#132440] text-white shadow-md rounded-xl">
+      <h1 className="text-4xl font-bold mb-8 text-center tracking-tight">
+        Popular Movies
+      </h1>
+
+      {/* Grid */}
+      <ul
+        className="grid gap-6 
+                 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 
+                 place-items-center"
+      >
         {movies?.map(({ id, title, overview, poster_path }) => (
           <Movie
             movies={movies}
@@ -50,23 +58,28 @@ const Movies = () => {
         ))}
       </ul>
 
-      <div className="flex justify-center items-center gap-4 mt-8">
+      {/* Pagination */}
+      <div className="flex justify-center items-center gap-6 mt-10">
         <button
           onClick={prevPage}
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-700 rounded hover:bg-gray-600 disabled:opacity-40"
+          className="px-4 py-2 bg-gray-700 rounded-lg 
+                 hover:bg-gray-600 disabled:opacity-40
+                 transition-all duration-200"
         >
           {"<<"}
         </button>
 
-        <span className="text-lg font-medium">
+        <span className="text-lg font-medium px-4 py-2 bg-[#0f1c33] rounded-lg shadow-inner">
           Page {page} of {total_pages}
         </span>
 
         <button
           onClick={nextPage}
           disabled={page === total_pages}
-          className="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 disabled:opacity-40"
+          className="px-4 py-2 bg-blue-600 rounded-lg 
+                 hover:bg-blue-700 disabled:opacity-40
+                 transition-all duration-200"
         >
           {">>"}
         </button>
