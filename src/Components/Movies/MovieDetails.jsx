@@ -38,8 +38,39 @@ const MovieDetails = ({ movies }) => {
     }
   };
 
+  const handleBack = () => navigate(`/movies`);
+
+  if (!movie) return <div className="text-white ">Loading...</div>;
+
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-6">
+      <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
+        <button
+          onClick={handleBack}
+          className="flex items-center gap-1 hover:text-blue-400 transition"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span>Movies</span>
+        </button>
+
+        <span className="text-gray-500">/</span>
+        <span className="text-blue-400 font-medium truncate max-w-[200px]">
+          {movie?.title || "Details"}
+        </span>
+      </div>
       <div className="max-w-5xl w-full bg-gray-800 rounded-2xl overflow-hidden shadow-xl flex flex-col md:flex-row">
         <div className="md:w-1/3">
           <img
