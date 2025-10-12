@@ -8,7 +8,7 @@ export default function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) {
-      navigate(`/search/${query}`);
+      navigate(`movies/search/${query}`);
       setQuery("");
     }
   };
