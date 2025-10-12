@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Nav/Navbar";
 import Movies from "./Components/Movies/Movies";
 import MovieDetails from "./Components/Movies/MovieDetails";
-import SearchResults from "./Components/Search/Search";
+import SearchResults from "./Components/Search/SearchResults";
 
 const App = () => {
   return (
