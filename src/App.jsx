@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Nav/Navbar";
 import Movies from "./Components/Movies/Movies";
 import MovieDetails from "./Components/Movies/MovieDetails";
+import SearchResults from "./Components/Search/Search";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Movies />} />
         <Route path="/movies" element={<Movies />} />
         <Route path="/movies/:id" element={<MovieDetails />} />
+        <Route path="/search/:query" element={<SearchResults />} />
       </Routes>
     </div>
   );
