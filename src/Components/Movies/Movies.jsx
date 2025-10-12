@@ -12,7 +12,7 @@ const Movies = () => {
       .get(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`)
       .then((res) => {
         setMovies(res.data.results);
-        console.log(res.data.results);
+        // console.log(res.data.results);
       })
       .catch((err) => {
         console.log(err);
