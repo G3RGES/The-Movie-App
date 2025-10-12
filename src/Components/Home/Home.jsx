@@ -49,6 +49,12 @@ export default function Home() {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen">
+      <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
+        <span className="text-blue-400 font-medium truncate max-w-[200px]">
+          Home
+        </span>{" "}
+        <span className="text-gray-500">/</span>
+      </div>
       {heroMovie && (
         <div
           className="relative h-[80vh] flex items-end justify-start bg-cover bg-center transition-all duration-700"
