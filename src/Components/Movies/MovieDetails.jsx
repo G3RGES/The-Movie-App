@@ -13,7 +13,7 @@ const MovieDetails = ({ movies }) => {
       .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
       .then((res) => {
         setMovie(res.data);
-        console.log(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
