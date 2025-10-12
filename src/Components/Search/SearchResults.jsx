@@ -16,30 +16,44 @@ export default function SearchResults() {
   }, [query]);
 
   return (
-    <div className="pt-24 px-8 bg-gray-900 min-h-screen text-white">
-      <h2 className="text-2xl font-semibold mb-6">Results for "{query}"</h2>
+    <div className="pt-24 px-6 sm:px-10 bg-gray-900 min-h-screen text-white">
+      <h2 className="text-2xl font-semibold mb-8">
+        Results for <span className="text-blue-400">"{query}"</span>
+      </h2>
+
       {movies.length === 0 ? (
-        <p>No movies found</p>
+        <p className="text-gray-400 text-lg">No movies found</p>
       ) : (
-        <div className="grid grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {movies.map((movie) => (
             <Link
               key={movie.id}
               to={`/movies/${movie.id}`}
-              className="bg-gray-800 rounded-lg p-3 hover:bg-gray-700 transition"
+              className="bg-gray-800 rounded-xl overflow-hidden hover:scale-105 hover:shadow-lg hover:shadow-blue-900/30 transition-transform duration-300"
             >
               {movie.poster_path ? (
                 <img
                   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                   alt={movie.title}
-                  className="rounded mb-2"
+                  className="w-full h-72 object-cover"
+                  loading="lazy"
                 />
               ) : (
-                <div className="h-72 bg-gray-700 flex items-center justify-center">
+                <div className="h-72 bg-gray-700 flex items-center justify-center text-gray-400 text-sm">
                   No Image
                 </div>
               )}
-              <h3 className="text-center font-medium">{movie.title}</h3>
+
+              <div className="p-3">
+                <h3 className="text-base font-semibold truncate">
+                  {movie.title}
+                </h3>
+                {movie.release_date && (
+                  <p className="text-gray-400 text-sm mt-1">
+                    {new Date(movie.release_date).getFullYear()}
+                  </p>
+                )}
+              </div>
             </Link>
           ))}
         </div>
