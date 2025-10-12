@@ -1,4 +1,29 @@
 @import "tailwindcss";
+/* @import "tailwindcss/preflight"; */
+/* @tailwind utilities; */
+
+.scrollbar-horizontal::-webkit-scrollbar {
+  height: 10px;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-track {
+  background: #18181b;
+  border-radius: 10px;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #e50914, #b81d24, #f5c518);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #f5c518, #b81d24, #e50914);
+}
+
+.scrollbar-horizontal::-webkit-scrollbar-corner {
+  background: transparent;
+}
 
 /* :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
