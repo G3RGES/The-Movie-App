@@ -7,7 +7,7 @@ const Movies = () => {
 
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+
   const total_pages = 20;
 
   useEffect(() => {
@@ -17,10 +17,8 @@ const Movies = () => {
       )
       .then((res) => {
         setMovies(res.data.results);
-        console.log(res.data);
+        // console.log(res.data);
 
-        // setTotalPages(Math.min(res.data.total_pages, 20));
-        setTotalPages(total_pages);
         // console.log(res.data.results);
       })
       .catch((err) => {
