@@ -6,8 +6,9 @@ const MainComponent = () => {
   return (
     <>
       <Navbar />
-
-      <Outlet />
+      <div className="pt-20 px-6">
+        <Outlet />
+      </div>
     </>
   );
 };
