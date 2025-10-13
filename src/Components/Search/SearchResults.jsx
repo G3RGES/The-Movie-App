@@ -1,7 +1,7 @@
 // import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../../AxiosInstance";
+import axiosInstance from "../../AxiosInstance";
 
 export default function SearchResults() {
   const { query } = useParams();
@@ -10,7 +10,7 @@ export default function SearchResults() {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
   useEffect(() => {
     axiosInstance
-      .get(`/search/movie?query=${query}`)
+      .get(`/search/movie?api_key=${API_KEY}&query=${query}`)
       .then((res) => setMovies(res.data.results))
       .catch((err) => console.log(err));
   }, [query]);
