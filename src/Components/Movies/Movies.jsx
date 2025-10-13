@@ -17,7 +17,7 @@ const Movies = () => {
 
   useEffect(() => {
     axiosInstance
-      .get(`/movie/popular?page=${page}`)
+      .get(`/movie/popular?api_key=${API_KEY} &page=${page}`)
       .then((res) => {
         setMovies(res.data.results);
         // console.log(res.data);
