@@ -16,7 +16,7 @@ export default function Home() {
       try {
         const [popularRes, trendingRes, upcomingRes] = await Promise.all([
           axiosInstance.get(`/movie/popular?api_key=${API_KEY}`),
-          axiosInstance.get(`/trending/movie/week?api_key=${API_KEY}`),
+          axiosInstance.get(`/trending/tv/week?api_key=${API_KEY}`),
           axiosInstance.get(`/movie/upcoming?api_key=${API_KEY}`),
         ]);
 
