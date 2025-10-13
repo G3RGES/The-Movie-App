@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "movies",
         element: <Movies />,
         loader: moviesLoader,
-        errorElement: ErrorBoundary,
+        errorElement: <ErrorBoundary />,
       },
       { path: "movies/:id", element: <MovieDetails /> },
       { path: "movies/search/:query", element: <SearchResults /> },
