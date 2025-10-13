@@ -1,7 +1,7 @@
 // import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Movie from "./Movie";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useRouteError } from "react-router-dom";
 import { axiosInstance } from "../../AxiosInstance";
 
 const Movies = () => {
@@ -129,6 +129,18 @@ const Movies = () => {
 export const moviesLoader = async () => {
   const res = await axiosInstance.get("/movie/popular");
   return res.data.results;
+};
+
+export const ErrorBoundary = () => {
+  const error = useRouteError();
+
+  return (
+    <div className="container mx-auto p-6 mt-10 bg-[#132440] text-white shadow-md rounded-xl">
+      <h1 className="text-4xl font-bold mb-8 text-center tracking-tight">
+        Error: {error.status} - {error.statusText}
+      </h1>
+    </div>
+  );
 };
 
 export default Movies;
