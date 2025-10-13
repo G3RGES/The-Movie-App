@@ -127,6 +127,7 @@ const Movies = () => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const moviesLoader = async () => {
   const res = await axiosInstance.get("/movie/popular");
   return res.data.results;
