@@ -6,7 +6,7 @@ export default function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-6 text-center">
       <div className="relative">
-        <h1 className="text-[120px] font-extrabold tracking-tighter leading-none text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+        <h1 className="text-[120px] font-extrabold tracking-tighter leading-none text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400 animate-[pulseGlow_3s_ease-in-out_infinite]">
           404
         </h1>
         <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-gray-400 text-sm tracking-widest">
