@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 
-axios.create({
+export const axiosInstance = axios.create({
   baseURL: "https://api.themoviedb.org/3/movie/popular",
   timeout: 2000,
   params: {
