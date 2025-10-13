@@ -1,5 +1,6 @@
 // import axios from "axios";
-import React, { useEffect, useState } from "react";
+// import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Movie from "./Movie";
 import { useLoaderData, useNavigate, useRouteError } from "react-router-dom";
 import { axiosInstance } from "../../AxiosInstance";
