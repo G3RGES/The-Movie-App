@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { axiosInstance } from "../../AxiosInstance";
 
 export default function SearchResults() {
   const { query } = useParams();
@@ -8,10 +9,8 @@ export default function SearchResults() {
   const navigate = useNavigate();
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
-      )
+    axiosInstance
+      .get(`/search/movie?query=${query}`)
       .then((res) => setMovies(res.data.results))
       .catch((err) => console.log(err));
   }, [query]);
