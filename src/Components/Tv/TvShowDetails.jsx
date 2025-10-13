@@ -22,7 +22,10 @@ const TvShowDetails = () => {
       });
   }, [id]);
 
-  const handleBack = () => navigate(`/tv`);
+  const handleBackToTv = () => navigate(`/tv`);
+
+  const handleBack = () => navigate(-1);
+
   if (!show) return <div className="text-white ">Loading...</div>;
 
   return (
@@ -37,6 +40,33 @@ const TvShowDetails = () => {
 
       {/* Main content */}
       <div className="relative container mx-auto px-6 py-12 flex flex-col md:flex-row gap-8 items-start">
+        <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
+          <button
+            onClick={handleBack}
+            className="flex items-center gap-1 hover:text-blue-400 transition"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              className="w-4 h-4"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+            <span>Shows</span>
+          </button>
+
+          <span className="text-gray-500">/</span>
+          <span className="text-blue-400 font-medium truncate max-w-[200px]">
+            {show?.name || "Details"}
+          </span>
+        </div>
         {/* Poster */}
         <div className="w-full md:w-1/3 flex-shrink-0 rounded-xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
           <img
@@ -101,7 +131,7 @@ const TvShowDetails = () => {
               Visit Official Page
             </a>
             <button
-              onClick={handleBack}
+              onClick={handleBackToTv}
               className="px-6 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition"
             >
               Back
