@@ -4,7 +4,7 @@ import "./index.css";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import Movies from "./Components/Movies/Movies";
+import Movies, { moviesLoader } from "./Components/Movies/Movies";
 import MovieDetails from "./Components/Movies/MovieDetails";
 import SearchResults from "./Components/Search/SearchResults";
 
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "movies", element: <Movies /> },
+      { path: "movies", element: <Movies />, loader: moviesLoader },
       { path: "movies/:id", element: <MovieDetails /> },
       { path: "movies/search/:query", element: <SearchResults /> },
     ],
