@@ -1,37 +1,38 @@
 // import axios from "axios";
 import React, { useEffect, useState } from "react";
 // import React, { useState } from "react";
-import Movie from "./Movie";
+// import Movie from "./Movie";
 import { useLoaderData, useNavigate, useRouteError } from "react-router-dom";
-import { axiosInstance } from "../../AxiosInstance";
 
+import Movie from "./Movie";
+import axiosInstance from "../../AxiosInstance";
+
+const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 const Movies = () => {
-  const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
-
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
 
-  const moviesData = useLoaderData(moviesLoader);
+  const moviesData = useLoaderData();
 
   const total_pages = 20;
 
-  useEffect(() => {
-    axiosInstance
-      .get(`/movie/popular?api_key=${API_KEY} &page=${page}`)
-      .then((res) => {
-        setMovies(res.data.results);
-        // console.log(res.data);
+  // useEffect(() => {
+  //   axiosInstance
+  //     .get(`/movie/popular?page=${page}`)
+  //     .then((res) => {
+  //       setMovies(res.data.results);
+  //       // console.log(res.data);
 
-        // console.log(res.data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  //       // console.log(res.data.results);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
 
-    // axiosInstance
-    //   .get(`/movie/popular?api_key=${API_KEY}&page=${page}`)
-    //   .then((res) => console.log(res.data.results));
-  }, [page]);
+  //   // axiosInstance
+  //   //   .get(`/movie/popular?api_key=${API_KEY}&page=${page}`)
+  //   //   .then((res) => console.log(res.data.results));
+  // }, [page]);
 
   const nextPage = () => {
     if (page < total_pages) setPage((prev) => prev + 1);
@@ -85,7 +86,7 @@ const Movies = () => {
                  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 
                  place-items-center"
       >
-        {movies?.map(({ id, title, overview, poster_path }) => (
+        {moviesData?.map(({ id, title, overview, poster_path }) => (
           <Movie
             movies={moviesData}
             key={id}
@@ -129,7 +130,7 @@ const Movies = () => {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const moviesLoader = async () => {
-  const res = await axiosInstance.get("/movie/popular");
+  const res = await axiosInstance.get(`/movie/popular?api_key=${API_KEY}`);
   return res.data.results;
 };
 
