@@ -1,8 +1,13 @@
 // import axios from "axios";
+// import React, { useEffect, useState } from "react";
 import React, { useEffect, useState } from "react";
-// import React, { useState } from "react";
 // import Movie from "./Movie";
-import { useLoaderData, useNavigate, useRouteError } from "react-router-dom";
+import {
+  useLoaderData,
+  useLocation,
+  useNavigate,
+  useRouteError,
+} from "react-router-dom";
 
 import Movie from "./Movie";
 import axiosInstance from "../../AxiosInstance";
@@ -10,11 +15,22 @@ import axiosInstance from "../../AxiosInstance";
 const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 const Movies = () => {
   // const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  const total_pages = 20;
 
   const moviesData = useLoaderData();
 
-  const total_pages = 20;
+  const location = useLocation();
+
+  const [page, setPage] = useState(() => {
+    const params = new URLSearchParams(location.search);
+    return Number(params.get("page")) || 1;
+  });
+
+  useEffect(() => {
+    navigate(`?page=${page}`, { replace: false });
+  }, [page, navigate]);
 
   // useEffect(() => {
   //   axiosInstance
@@ -41,8 +57,6 @@ const Movies = () => {
   const prevPage = () => {
     if (page > 1) setPage((prev) => prev - 1);
   };
-
-  const navigate = useNavigate();
 
   const handleBack = () => navigate(`/`);
 
@@ -128,9 +142,21 @@ const Movies = () => {
   );
 };
 
+// export const moviesLoader = async (page = 1) => {
+//   const res = await axiosInstance.get(
+//     `/movie/popular?api_key=${API_KEY}&page=${page}`
+//   );
+//   return res.data.results;
+// };
+
 // eslint-disable-next-line react-refresh/only-export-components
-export const moviesLoader = async () => {
-  const res = await axiosInstance.get(`/movie/popular?api_key=${API_KEY}`);
+export const moviesLoader = async ({ request }) => {
+  const url = new URL(request.url);
+  const page = url.searchParams.get("page") || 1;
+
+  const res = await axiosInstance.get(
+    `/movie/popular?api_key=${API_KEY}&page=${page}`
+  );
   return res.data.results;
 };
 
