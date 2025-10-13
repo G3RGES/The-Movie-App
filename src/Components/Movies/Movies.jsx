@@ -1,7 +1,8 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Movie from "./Movie";
 import { useNavigate } from "react-router-dom";
+import { axiosInstance } from "../../AxiosInstance";
 
 const Movies = () => {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
@@ -12,10 +13,8 @@ const Movies = () => {
   const total_pages = 20;
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`
-      )
+    axiosInstance
+      .get(`/movie/popular?page=${page}`)
       .then((res) => {
         setMovies(res.data.results);
         // console.log(res.data);
@@ -25,6 +24,10 @@ const Movies = () => {
       .catch((err) => {
         console.log(err);
       });
+
+    // axiosInstance
+    //   .get(`/movie/popular?api_key=${API_KEY}&page=${page}`)
+    //   .then((res) => console.log(res.data.results));
   }, [page]);
 
   const nextPage = () => {
