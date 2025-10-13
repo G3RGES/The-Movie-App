@@ -9,6 +9,7 @@ import MovieDetails from "./Components/Movies/MovieDetails";
 import SearchResults from "./Components/Search/SearchResults";
 
 import Home from "./Components/Home/Home";
+import NotFound from "./Components/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       { path: "movies/search/:query", element: <SearchResults /> },
     ],
   },
+  { path: "*", element: <NotFound /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
