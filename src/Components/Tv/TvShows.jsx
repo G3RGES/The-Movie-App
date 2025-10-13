@@ -63,7 +63,7 @@ const TvShows = () => {
 
         <span className="text-gray-500">/</span>
         <span className="text-blue-400 font-medium truncate max-w-[200px]">
-          TV Shows
+          Movies
         </span>
       </div>
 
