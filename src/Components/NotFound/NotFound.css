@@ -1,0 +1,9 @@
+@keyframes pulseGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 10px #3b82f6;
+  }
+  50% {
+    text-shadow: 0 0 25px #06b6d4;
+  }
+}
