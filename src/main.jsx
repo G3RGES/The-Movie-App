@@ -15,6 +15,8 @@ import SearchResults from "./Components/Search/SearchResults";
 import Home from "./Components/Home/Home";
 import NotFound from "./Components/NotFound/NotFound";
 import store from "./store/store";
+import TvShows, { tvShowsLoader } from "./Components/Tv/TvShows";
+import TvShowDetails from "./Components/Tv/TvShowDetails";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,13 @@ const router = createBrowserRouter([
         loader: moviesLoader,
         errorElement: <ErrorBoundary />,
       },
+      {
+        path: "tv",
+        element: <TvShows />,
+        loader: tvShowsLoader,
+        errorElement: <ErrorBoundary />,
+      },
+      { path: "tv/:id", element: <TvShowDetails /> },
       { path: "movies/:id", element: <MovieDetails /> },
       { path: "movies/search/:query", element: <SearchResults /> },
     ],
