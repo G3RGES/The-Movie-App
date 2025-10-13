@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 // import axios from "axios";
 import { Link } from "react-router-dom";
-import { axiosInstance } from "../../AxiosInstance";
+import axiosInstance from "../../AxiosInstance";
 
 export default function Home() {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
@@ -15,9 +15,9 @@ export default function Home() {
     const fetchMovies = async () => {
       try {
         const [popularRes, trendingRes, upcomingRes] = await Promise.all([
-          axiosInstance.get(`/movie/popular`),
-          axiosInstance.get(`/trending/movie/week`),
-          axiosInstance.get(`/movie/upcoming`),
+          axiosInstance.get(`/movie/popular?api_key=${API_KEY}`),
+          axiosInstance.get(`/trending/movie/week?api_key=${API_KEY}`),
+          axiosInstance.get(`/movie/upcoming?api_key=${API_KEY}`),
         ]);
 
         setPopular(popularRes.data.results.slice(0, 5)); // only first 5 for hero
