@@ -17,19 +17,10 @@ const App = () => {
   // }, [dark]);
 
   return (
-    <div
+    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+      {/* <div
       className={`dark:bg-gray-900 dark:text-gray-100 bg-gray-100 text-gray-900 min-h-screen`}
-    >
-      {/* <BrowserRouter>
-        <Navbar />
-
-        <Routes>
-          <Route path="/" element={<Movies />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:id" element={<MovieDetails />} />
-          <Route path="/movies/search/:query" element={<SearchResults />} />
-        </Routes>
-      </BrowserRouter> */}
+    > */}
 
       {/* <Navbar darkMode={dark} setDark={setDark} /> */}
       <Navbar />
