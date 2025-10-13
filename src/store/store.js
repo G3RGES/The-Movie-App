@@ -1,31 +1,33 @@
-// import { configureStore } from "@reduxjs/toolkit";
-import { createStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+// import { createStore } from "@reduxjs/toolkit";
+import themeReducer from "./themeSlice";
+export default configureStore({
+  reducer: {
+    theme: themeReducer,
+  },
+});
 
-// export default configureStore({
-//   reducer: {},
-// });
+// const themeReducer = (state = { theme: "light" }, action) => {
+//   if (action.type === "SET_THEME") {
+//     return {
+//       theme: action.payload,
+//     };
+//   }
 
-const themeReducer = (state = { theme: "light" }, action) => {
-  if (action.type === "SET_THEME") {
-    return {
-      theme: action.payload,
-    };
-  }
+//   if (action.type === "TOGGLE_THEME") {
+//     return {
+//       theme: state.theme === "light" ? "dark" : "light",
+//     };
+//   }
 
-  if (action.type === "TOGGLE_THEME") {
-    return {
-      theme: state.theme === "light" ? "dark" : "light",
-    };
-  }
+//   if (action.type === "RESET_THEME") {
+//     return {
+//       theme: "light",
+//     };
+//   }
 
-  if (action.type === "RESET_THEME") {
-    return {
-      theme: "light",
-    };
-  }
+//   return state;
+// };
 
-  return state;
-};
-
-const store = createStore(themeReducer);
-export default store;
+// const store = createStore(themeReducer);
+// export default store;
