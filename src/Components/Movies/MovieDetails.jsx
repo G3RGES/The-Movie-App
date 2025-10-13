@@ -1,6 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { axiosInstance } from "../../AxiosInstance";
 
 const MovieDetails = ({ movies }) => {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
@@ -9,8 +10,8 @@ const MovieDetails = ({ movies }) => {
   const [movie, setMovie] = useState({});
 
   useEffect(() => {
-    axios
-      .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
+    axiosInstance
+      .get(`/movie/${id}`)
       .then((res) => {
         setMovie(res.data);
         // console.log(res.data);
