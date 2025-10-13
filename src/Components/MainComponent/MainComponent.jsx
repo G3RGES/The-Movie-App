@@ -1,10 +1,14 @@
 import React from "react";
 import Navbar from "../Nav/Navbar";
 import { Outlet } from "react-router-dom";
-import { useSelector, connect } from "react-redux";
+import { toggleTheme } from "../../store/themeSlice";
+// import { useSelector, connect, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const MainComponent = () => {
-  const theme = useSelector((state) => state.theme);
+  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme);
+  const dispatch = useDispatch();
 
   return (
     <>
