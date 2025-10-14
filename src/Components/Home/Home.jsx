@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // import axios from "axios";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../AxiosInstance";
+import { useSelector } from "react-redux";
 
 export default function Home() {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
@@ -9,6 +10,8 @@ export default function Home() {
   const [trending, setTrending] = useState([]);
   const [upcoming, setUpcoming] = useState([]);
   const [heroIndex, setHeroIndex] = useState(0);
+
+  const theme = useSelector((state) => state.theme.mode);
 
   // Fetch data once
   useEffect(() => {
@@ -43,7 +46,13 @@ export default function Home() {
   const heroMovie = popular[heroIndex];
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen">
+    <div
+      className={`${
+        theme === "dark"
+          ? "bg-[#132440] text-white"
+          : "text-gray-900 bg-gray-100"
+      } min-h-screen`}
+    >
       <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
         <span className="text-blue-400 font-medium truncate max-w-[200px]">
           Home
