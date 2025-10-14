@@ -11,6 +11,8 @@ import {
 
 import Movie from "./Movie";
 import axiosInstance from "../../AxiosInstance";
+import { useDispatch, useSelector } from "react-redux";
+// import { addFavourite } from "../../store/FavouriteSlice";
 
 const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 const Movies = () => {
@@ -31,6 +33,11 @@ const Movies = () => {
   useEffect(() => {
     navigate(`?page=${page}`, { replace: false });
   }, [page, navigate]);
+
+  const theme = useSelector((state) => state.theme.mode);
+  const loader = useSelector((state) => state.loader.isLoading);
+
+  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   axiosInstance
@@ -95,22 +102,27 @@ const Movies = () => {
       </h1>
 
       {/* Grid */}
-      <ul
-        className="grid gap-6 
+      {loader ? (
+        <div className="text-center font-bold ">Loading...</div>
+      ) : (
+        <ul
+          className="grid gap-6 
                  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 
                  place-items-center"
-      >
-        {moviesData?.map(({ id, title, overview, poster_path }) => (
-          <Movie
-            movies={moviesData}
-            key={id}
-            title={title}
-            overview={overview}
-            poster_path={poster_path}
-            id={id}
-          />
-        ))}
-      </ul>
+        >
+          {moviesData?.map(({ id, title, overview, poster_path }, movie) => (
+            <Movie
+              movies={moviesData}
+              key={id}
+              title={title}
+              overview={overview}
+              poster_path={poster_path}
+              id={id}
+              movie={movie}
+            />
+          ))}
+        </ul>
+      )}
 
       {/* Pagination */}
       <div className="flex justify-center items-center gap-6 mt-10">
