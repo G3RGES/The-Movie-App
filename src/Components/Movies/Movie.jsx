@@ -1,10 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { addFavourite } from "../../store/FavouriteSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-const Movie = ({ id, title, overview, poster_path, movie }) => {
+const Movie = ({ id, title, overview, poster_path }) => {
   const navigate = useNavigate();
+  const favourite = useSelector((state) => state.favourite);
+
+  const isFavourite = favourite.movies.some((movie) => movie.id === id);
+
+  // console.log(isFavourite);
 
   const handleNavigate = () => {
     navigate(`/movies/${id}`);
@@ -46,26 +51,42 @@ const Movie = ({ id, title, overview, poster_path, movie }) => {
           {overview}
         </p>
       </div>
-      <div className=" flex flex-row-reverse justify-center items-center h-full w-full gap-2">
+      <div
+        className={` flex flex-row-reverse justify-center items-center h-full w-full gap-2`}
+      >
         <button
-          onClick={() => addToFavourite(movie)}
-          className="bg-transparent mt-4  p-2 rounded-full hover:bg-[#3C467B] transition"
+          onClick={addToFavourite}
+          className={`${
+            isFavourite ? "bg-[#3C467B]" : "bg-transparent"
+          } hover:bg-[#3C467B]  mt-4  p-2 rounded-full  transition`}
         >
-          {/* <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="yellow"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="white"
-          className="w-5 h-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M21.8 8.25a6 6 0 00-9.8-6.9 6 6 0 00-9.8 6.9c3.1 5.5 9.8 11.2 9.8 11.2s6.7-5.7 9.8-11.2z"
-          />
-        </svg> */}
-          ❤️
+          {isFavourite ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-red-500"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                clipRule="evenodd"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6 text-white"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fillRule="evenodd"
+                d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                clipRule="evenodd"
+              />
+            </svg>
+          )}
         </button>
         <button
           onClick={handleNavigate}
