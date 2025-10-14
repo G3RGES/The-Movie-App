@@ -27,7 +27,7 @@ const MainComponent = () => {
   return (
     <>
       <div
-        className={`${theme === "dark" ? "dark" : ""}`}
+        className={`${theme === "dark" ? "bg-gray-900" : "bg-gray-50"} `}
         dir={lang === "ar" ? "rtl" : "ltr"}
       >
         <Navbar />
