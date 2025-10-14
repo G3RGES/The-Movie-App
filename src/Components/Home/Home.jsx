@@ -49,7 +49,7 @@ export default function Home() {
     <div
       className={`${
         theme === "dark"
-          ? "bg-[#132440] text-white"
+          ? "bg-gray-900 text-white"
           : "text-gray-900 bg-gray-100"
       } min-h-screen`}
     >
