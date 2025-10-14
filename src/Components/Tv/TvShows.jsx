@@ -97,23 +97,36 @@ const TvShows = () => {
         ))}
       </ul>
 
+      {/* Pagination */}
       <div className="flex justify-center items-center gap-6 mt-10">
         <button
           onClick={prevPage}
           disabled={page === 1}
-          className="px-4 py-2 bg-gray-700 rounded-lg hover:bg-gray-600 disabled:opacity-40 transition-all duration-200"
+          className={`${
+            theme === "dark" ? "bg-[#0f1c33]" : "bg-gray-100"
+          } px-4 py-2 hover:text-white rounded-lg shadow-md
+                 hover:bg-gray-600 disabled:opacity-40
+                 transition-all duration-200`}
         >
           {"<<"}
         </button>
 
-        <span className="text-lg font-medium px-4 py-2 bg-[#0f1c33] rounded-lg shadow-inner">
+        <span
+          className={`${
+            theme === "dark" ? "bg-[#0f1c33]" : "bg-gray-100"
+          } text-lg font-medium px-4 py-2 bg-[#0f1c33] rounded-lg shadow-inner`}
+        >
           Page {page} of {total_pages}
         </span>
 
         <button
           onClick={nextPage}
           disabled={page === total_pages}
-          className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 disabled:opacity-40 transition-all duration-200"
+          className={`${
+            theme === "dark" ? "bg-[#0f1c33]" : "bg-gray-100"
+          } px-4 py-2 rounded-lg 
+                 hover:bg-blue-900 hover:text-white shadow-md disabled:opacity-40
+                 transition-all duration-200`}
         >
           {">>"}
         </button>
