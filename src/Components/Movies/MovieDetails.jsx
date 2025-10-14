@@ -44,7 +44,7 @@ const MovieDetails = ({ movies }) => {
   if (!movie) return <div className="text-white ">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen rounded-lg bg-gray-900 text-gray-100 flex flex-col items-center justify-center p-6">
       <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
         <button
           onClick={handleBack}
@@ -72,7 +72,7 @@ const MovieDetails = ({ movies }) => {
           {movie?.title || "Details"}
         </span>
       </div>
-      <div className="max-w-5xl w-full bg-gray-800 rounded-2xl overflow-hidden shadow-xl flex flex-col md:flex-row">
+      <div className="max-w-5xl w-full  bg-gray-800 rounded-2xl overflow-hidden shadow-xl flex flex-col md:flex-row">
         <div className="md:w-1/3">
           <img
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
