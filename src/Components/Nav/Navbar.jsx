@@ -30,7 +30,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-900 text-white shadow-md fixed w-full top-0 z-50">
+    <nav
+      className={`${
+        theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
+      } shadow-md fixed w-full top-0 z-50`}
+    >
       <div className="mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <h1 className="text-2xl font-bold tracking-wide text-blue-500">
@@ -127,7 +131,9 @@ export default function Navbar() {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-7 w-7 text-gray-300"
+            className={`h-7 w-7 ${
+              theme === "dark" ? "text-gray-300" : "text-gray-900"
+            }`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -153,7 +159,13 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-gray-800 px-6 py-4 space-y-4 border-t border-gray-700">
+        <div
+          className={` md:hidden ${
+            theme === "dark"
+              ? "text-gray-200  bg-gray-800 border-gray-700"
+              : "text-gray-900 bg-white border-gray-200"
+          } px-6 py-4 space-y-4 border-t `}
+        >
           <NavLink
             to="/"
             end
@@ -161,7 +173,9 @@ export default function Navbar() {
             className={({ isActive }) =>
               isActive
                 ? "block text-blue-400 font-semibold"
-                : "block hover:text-blue-400"
+                : `${
+                    theme === "dark" ? "text-gray-300" : "text-gray-900"
+                  } block hover:text-blue-400`
             }
           >
             Home
@@ -173,7 +187,9 @@ export default function Navbar() {
             className={({ isActive }) =>
               isActive
                 ? "block text-blue-400 font-semibold"
-                : "block hover:text-blue-400"
+                : `${
+                    theme === "dark" ? "text-gray-300" : "text-gray-900"
+                  } block hover:text-blue-400`
             }
           >
             Movies
