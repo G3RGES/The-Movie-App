@@ -85,7 +85,11 @@ export default function Navbar() {
             {lang === "en" ? "EN" : "AR"}
           </button>
           <button
-            className="bg-gray-600 hover:bg-gray-700 px-4 py-1 rounded"
+            className={`${
+              theme === "dark"
+                ? "bg-transparent   hover:bg-gray-800"
+                : "bg-gray-100 hover:bg-gray-200"
+            }   px-4 py-1 rounded shadow-md`}
             onClick={toggleTheme}
           >
             {theme === "light" ? "Light" : "Dark"}
