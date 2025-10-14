@@ -16,18 +16,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import TvShows, { tvShowsLoader } from "./Components/Tv/TvShows";
 import TvShowDetails from "./Components/Tv/TvShowDetails";
 import MainComponent from "./Components/MainComponent/MainComponent";
+import Favourite from "./Components/Favourite/Favourite";
 
 const App = () => {
-  // const [dark, setDark] = useState(false);
-
-  // useEffect(() => {
-  //   if (dark) {
-  //     document.documentElement.classList.add("dark");
-  //   } else {
-  //     document.documentElement.classList.remove("dark");
-  //   }
-  // }, [dark]);
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -46,6 +37,7 @@ const App = () => {
           loader: tvShowsLoader,
           errorElement: <ErrorBoundary />,
         },
+        { path: "favourites", element: <Favourite /> },
         { path: "tv/:id", element: <TvShowDetails /> },
         { path: "movies/:id", element: <MovieDetails /> },
         { path: "movies/search/:query", element: <SearchResults /> },
@@ -64,7 +56,7 @@ const App = () => {
       <div className="pt-20 px-6">
         <Outlet />
       </div> */}
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </div>
   );
 };
