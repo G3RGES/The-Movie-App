@@ -108,7 +108,11 @@ export default function Navbar() {
         </div>
 
         {/* Desktop search */}
-        <div className="hidden md:flex items-center bg-gray-800 rounded-lg px-3 py-1">
+        <div
+          className={`hidden md:flex items-center ${
+            theme === "dark" ? "bg-gray-800" : "bg-white"
+          } shadow-md rounded-lg px-3 py-1`}
+        >
           <form onSubmit={handleSubmit} className="flex items-center gap-2">
             <input
               type="text"
@@ -119,7 +123,11 @@ export default function Navbar() {
             />
             <button
               type="submit"
-              className="bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded text-sm"
+              className={`${
+                theme === "dark"
+                  ? "bg-gray-800 hover:bg-gray-900"
+                  : "bg-white hover:bg-gray-100 "
+              }  transition ease-in  px-4 py-1 rounded text-sm`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +135,9 @@ export default function Navbar() {
                 viewBox="0 0 24 24"
                 strokeWidth="2"
                 stroke="currentColor"
-                className="w-5 h-5 text-gray-200"
+                className={`w-5 h-5 ${
+                  theme === "dark" ? "text-gray-300" : "text-gray-900"
+                } `}
               >
                 <path
                   strokeLinecap="round"
