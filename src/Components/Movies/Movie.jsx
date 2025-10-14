@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 const Movie = ({ id, title, overview, poster_path }) => {
   const navigate = useNavigate();
   const favourite = useSelector((state) => state.favourite);
+  const theme = useSelector((state) => state.theme.mode);
 
   const isFavourite = favourite.movies.some((movie) => movie.id === id);
 
@@ -29,9 +30,11 @@ const Movie = ({ id, title, overview, poster_path }) => {
 
   return (
     <li
-      className="bg-[#0f1c33] p-4 rounded-xl shadow-lg 
+      className={`${
+        theme === "dark" ? "bg-[#0f1c33]" : "bg-gray-100 text-gray-900"
+      }  p-4 rounded-xl shadow-lg 
              hover:shadow-2xl transition-all duration-300 
-             flex flex-col justify-between w-full max-w-xs"
+             flex flex-col justify-between w-full max-w-xs`}
     >
       <div>
         <div className="relative overflow-hidden rounded-lg">
@@ -49,8 +52,10 @@ const Movie = ({ id, title, overview, poster_path }) => {
         </h2>
 
         <p
-          className="text-sm text-gray-300 text-center 
-                 mt-2 overflow-hidden text-ellipsis line-clamp-4 leading-relaxed"
+          className={`${
+            theme === "dark" ? "bg-[#0f1c33]" : "bg-gray-100 text-gray-900"
+          } text-sm text-gray-300 text-center 
+                 mt-2 overflow-hidden text-ellipsis line-clamp-4 leading-relaxed`}
         >
           {overview}
         </p>
@@ -60,7 +65,9 @@ const Movie = ({ id, title, overview, poster_path }) => {
       >
         <button
           onClick={isFavourite ? () => handleRemove(id) : addToFavourite}
-          className={`bg-transparent hover:bg-gray-900  mt-4  p-2 rounded-full  transition`}
+          className={`${
+            theme === "dark" ? "bg-transparent" : "bg-gray-900"
+          }  hover:bg-gray-900  mt-4  p-2 rounded-full  transition`}
         >
           {isFavourite ? (
             <svg
