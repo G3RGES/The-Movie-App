@@ -75,6 +75,17 @@ export default function Navbar() {
           >
             Shows
           </NavLink>
+
+          <NavLink
+            to="/favourites"
+            className={({ isActive }) =>
+              isActive
+                ? "text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
+                : "hover:text-blue-400 transition"
+            }
+          >
+            Favourites
+          </NavLink>
         </div>
 
         <div className="hidden sm:flex gap-8 ">
