@@ -1,10 +1,25 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import { changeLang } from "../../store/LangSlice";
+import { toggleThemeMode } from "../../store/themeSlice";
 
 export default function Navbar() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const theme = useSelector((state) => state.theme.mode);
+  const lang = useSelector((state) => state.lang.lang);
+
+  const dispatch = useDispatch();
+
+  const setLang = () => {
+    dispatch(changeLang(lang === "en" ? "ar" : "en"));
+  };
+
+  const toggleTheme = () => {
+    dispatch(toggleThemeMode());
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,6 +71,18 @@ export default function Navbar() {
           >
             Shows
           </NavLink>
+        </div>
+
+        <div className="hidden md:flex gap-8">
+          <button
+            onClick={() => setLang(lang)}
+            className="bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded"
+          >
+            {lang === "en" ? "EN" : "AR"}
+          </button>
+          <button className="bg-gray-600 hover:bg-gray-700 px-4 py-1 rounded">
+            {theme === "light" ? "Light" : "Dark"}
+          </button>
         </div>
 
         {/* Desktop search */}
