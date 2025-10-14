@@ -80,7 +80,10 @@ export default function Navbar() {
           >
             {lang === "en" ? "EN" : "AR"}
           </button>
-          <button className="bg-gray-600 hover:bg-gray-700 px-4 py-1 rounded">
+          <button
+            className="bg-gray-600 hover:bg-gray-700 px-4 py-1 rounded"
+            onClick={toggleTheme}
+          >
             {theme === "light" ? "Light" : "Dark"}
           </button>
         </div>
