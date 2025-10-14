@@ -29,11 +29,11 @@ const TvShowDetails = () => {
   if (!show) return <div className="text-white ">Loading...</div>;
 
   return (
-    <div className="relative w-full min-h-screen text-white">
+    <div className="relative w-full rounded-lg min-h-screen text-white">
       {/* Backdrop */}
       {show.backdrop_path && (
         <div
-          className="absolute inset-0 bg-cover bg-center filter brightness-50"
+          className="absolute rounded-lg inset-0 bg-cover bg-center filter brightness-50"
           style={{ backgroundImage: `url(${imageBase}${show.backdrop_path})` }}
         ></div>
       )}
