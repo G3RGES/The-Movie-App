@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../AxiosInstance";
 
-const MovieDetails = ({ movies }) => {
+const MovieDetails = () => {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
   const { id } = useParams();
 
@@ -22,22 +22,6 @@ const MovieDetails = ({ movies }) => {
   }, [id]);
 
   const navigate = useNavigate();
-
-  const currentIndex = movies?.findIndex((m) => m.id === Number(id));
-
-  const goPrev = () => {
-    if (currentIndex > 0) {
-      const prevId = movies[currentIndex - 1].id;
-      navigate(`/movies/${prevId}`);
-    }
-  };
-
-  const goNext = () => {
-    if (currentIndex < movies.length - 1) {
-      const nextId = movies[currentIndex + 1].id;
-      navigate(`/movies/${nextId}`);
-    }
-  };
 
   const handleBack = () => navigate(`/movies`);
 
@@ -123,21 +107,12 @@ const MovieDetails = ({ movies }) => {
             )}
           </div>
           <div className="flex justify-between w-full mt-8">
-            <button
-              onClick={goPrev}
-              //   disabled={currentIndex === 0}
-              className="px-4 py-2 rounded bg-gray-700 hover:bg-gray-600 disabled:opacity-40"
-            >
-              Previous
-            </button>
-
-            <button
-              onClick={goNext}
-              //   disabled={currentIndex === movies.length - 1}
-              className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 disabled:opacity-40"
-            >
-              Next
-            </button>
+            <span className="text-gray-400 text-sm">
+              Budget: ${movie.budget?.toLocaleString() || "N/A"}
+            </span>
+            <span className="text-gray-400 text-sm">
+              Revenue: ${movie.revenue?.toLocaleString() || "N/A"}
+            </span>
           </div>
         </div>
       </div>
