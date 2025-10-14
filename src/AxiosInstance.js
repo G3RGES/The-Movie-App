@@ -1,24 +1,31 @@
 import axios from "axios";
+import { store } from "./store/store";
+import { changeLoaderState } from "./store/LoaderSlice";
 
 const axiosInstance = axios.create({
   baseURL: "https://api.themoviedb.org/3",
   //   timeout: 2000,
 });
 export default axiosInstance;
-// axiosInstance.interceptors.request.use(
-//   (config) => {
-//     if (config.baseURL == "/movie/popular" && config.method == "get") {
-//       config.headers.Authorization = `Bearer ${API_KEY}`;
-//     }
-//     console.log(config);
-//     // return config;
-//   },
-//   (error) => {
-//     return Promise.reject(error);
-//   }
-// );
+axiosInstance.interceptors.request.use(
+  (config) => {
+    store.dispatch(changeLoaderState(true));
+    return config;
+  },
 
-// axiosInstance.interceptors.response.use(
-//   (response) => response,
-//   (error) => Promise.reject(error)
-// );
+  (error) => {
+    store.dispatch(changeLoaderState(false));
+    Promise.reject(error);
+  }
+);
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    store.dispatch(changeLoaderState(false));
+    return response;
+  },
+  (error) => {
+    store.dispatch(changeLoaderState(false));
+    Promise.reject(error);
+  }
+);
