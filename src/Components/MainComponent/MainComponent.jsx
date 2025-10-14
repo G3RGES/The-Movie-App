@@ -1,10 +1,11 @@
 import React from "react";
 import Navbar from "../Nav/Navbar";
 import { Outlet } from "react-router-dom";
-import { toggleThemeMode } from "../../store/themeSlice";
+// import { toggleThemeMode } from "../../store/themeSlice";
 
-import { useSelector, useDispatch } from "react-redux";
-import { changeLang } from "../../store/LangSlice";
+// import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+// import { changeLang } from "../../store/LangSlice";
 
 const MainComponent = () => {
   const theme = useSelector((state) => state.theme.mode);
@@ -14,7 +15,7 @@ const MainComponent = () => {
   console.log(lang);
 
   // const theme = useSelector((state) => state.theme);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // const setLang = () => {
   //   dispatch(changeLang(lang === "en" ? "ar" : "en"));
