@@ -6,11 +6,11 @@ const langSlice = createSlice({
     lang: "en",
   },
   reducers: {
-    setLang: (state, action) => {
+    changeLang: (state, action) => {
       state.lang = action.payload;
     },
   },
 });
 
-export const { setLang } = langSlice.actions;
+export const { changeLang } = langSlice.actions;
 export default langSlice.reducer;
