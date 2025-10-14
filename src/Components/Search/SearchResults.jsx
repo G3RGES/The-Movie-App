@@ -2,6 +2,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../AxiosInstance";
+import { useSelector } from "react-redux";
 
 export default function SearchResults() {
   const { query } = useParams();
@@ -15,10 +16,18 @@ export default function SearchResults() {
       .catch((err) => console.log(err));
   }, [query]);
 
+  const theme = useSelector((state) => state.theme.mode);
+
   const handleBackToMovies = () => navigate(`/movies`);
   const handleback = () => navigate(-1);
   return (
-    <div className="pt-24 px-6 sm:px-10 bg-gray-900 min-h-screen text-white">
+    <div
+      className={`pt-24 px-6 sm:px-10 ${
+        theme === "dark"
+          ? "bg-gray-900 text-white"
+          : "bg-gray-100 text-gray-900"
+      }  min-h-screen `}
+    >
       <div className="flex  items-center gap-2 text-gray-300 mb-8 text-sm">
         <button
           onClick={handleBackToMovies}
