@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { addFavourite } from "../../store/FavouriteSlice";
+import { addFavourite, removeFavourite } from "../../store/FavouriteSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Movie = ({ id, title, overview, poster_path }) => {
@@ -21,6 +21,10 @@ const Movie = ({ id, title, overview, poster_path }) => {
     console.log(movieData);
 
     dispatch(addFavourite(movieData));
+  };
+
+  const handleRemove = (id) => {
+    dispatch(removeFavourite(id));
   };
 
   return (
@@ -55,10 +59,8 @@ const Movie = ({ id, title, overview, poster_path }) => {
         className={` flex flex-row-reverse justify-center items-center h-full w-full gap-2`}
       >
         <button
-          onClick={addToFavourite}
-          className={`${
-            isFavourite ? "bg-[#3C467B]" : "bg-transparent"
-          } hover:bg-[#3C467B]  mt-4  p-2 rounded-full  transition`}
+          onClick={isFavourite ? () => handleRemove(id) : addToFavourite}
+          className={`bg-transparent hover:bg-gray-900  mt-4  p-2 rounded-full  transition`}
         >
           {isFavourite ? (
             <svg
