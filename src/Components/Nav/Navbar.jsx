@@ -73,7 +73,7 @@ export default function Navbar() {
           </NavLink>
         </div>
 
-        <div className="hidden md:flex gap-8">
+        <div className="hidden sm:flex gap-8 ">
           <button
             onClick={() => setLang(lang)}
             className="bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded"
