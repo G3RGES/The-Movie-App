@@ -6,14 +6,6 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (query.trim()) {
-  //     navigate(`movies/search/${query}`);
-  //     setQuery("");
-  //   }
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!query.trim()) return;
