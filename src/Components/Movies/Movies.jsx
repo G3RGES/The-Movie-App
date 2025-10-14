@@ -11,8 +11,7 @@ import {
 
 import Movie from "./Movie";
 import axiosInstance from "../../AxiosInstance";
-import { useDispatch, useSelector } from "react-redux";
-// import { addFavourite } from "../../store/FavouriteSlice";
+import { useSelector } from "react-redux";
 
 const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 const Movies = () => {
@@ -36,8 +35,6 @@ const Movies = () => {
 
   const theme = useSelector((state) => state.theme.mode);
   const loader = useSelector((state) => state.loader.isLoading);
-
-  const dispatch = useDispatch();
 
   // useEffect(() => {
   //   axiosInstance
@@ -68,7 +65,13 @@ const Movies = () => {
   const handleBack = () => navigate(`/`);
 
   return (
-    <div className="container mx-auto p-6 mt-10 bg-[#132440] text-white shadow-md rounded-xl">
+    <div
+      className={`"container mx-auto p-6 mt-10 ${
+        theme === "dark"
+          ? "bg-[#132440] text-white"
+          : "text-gray-900 bg-gray-100"
+      } shadow-md rounded-xl"`}
+    >
       <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
         <button
           onClick={handleBack}
