@@ -28,10 +28,6 @@ const Movies = () => {
   const dispatch = useDispatch();
   const moviesData = useSelector((state) => state.movies.movies);
 
-  useEffect(() => {
-    dispatch(moviesAction()); // fetch first page // dispatch(moviesAction()); // fetch first page
-  }, [dispatch]);
-
   const location = useLocation();
 
   const [page, setPage] = useState(() => {
@@ -40,8 +36,9 @@ const Movies = () => {
   });
 
   useEffect(() => {
+    dispatch(moviesAction(page)); // fetch first page // dispatch(moviesAction()); // fetch first page
     navigate(`?page=${page}`, { replace: false });
-  }, [page, navigate]);
+  }, [page, navigate, dispatch]);
 
   const theme = useSelector((state) => state.theme.mode);
   const loader = useSelector((state) => state.loader.isLoading);
