@@ -6,12 +6,12 @@ import { toggleThemeMode } from "../../store/themeSlice";
 
 export default function Navbar() {
   const [query, setQuery] = useState("");
-  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const theme = useSelector((state) => state.theme.mode);
   const lang = useSelector((state) => state.lang.lang);
-
-  const dispatch = useDispatch();
 
   const setLang = () => {
     dispatch(changeLang(lang === "en" ? "ar" : "en"));
@@ -36,16 +36,19 @@ export default function Navbar() {
       } shadow-md fixed w-full top-0 z-50`}
     >
       <div className="mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
         <h1 className="text-2xl font-bold tracking-wide text-blue-500">
           The Movie App
         </h1>
 
-        {/* Desktop links */}
-        <div className="hidden md:flex gap-8">
+        <div
+          className={`${
+            menuOpen ? "flex" : "hidden"
+          } flex-col md:flex md:flex-row gap-8`}
+        >
           <NavLink
             to="/"
             end
+            onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
@@ -57,6 +60,7 @@ export default function Navbar() {
 
           <NavLink
             to="/movies"
+            onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
@@ -65,8 +69,10 @@ export default function Navbar() {
           >
             Movies
           </NavLink>
+
           <NavLink
             to="/tv"
+            onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
@@ -78,6 +84,7 @@ export default function Navbar() {
 
           <NavLink
             to="/favourites"
+            onClick={() => setMenuOpen(false)}
             className={({ isActive }) =>
               isActive
                 ? "text-blue-400 font-semibold border-b-2 border-blue-400 pb-1"
@@ -88,26 +95,26 @@ export default function Navbar() {
           </NavLink>
         </div>
 
-        <div className="hidden sm:flex gap-8 ">
+        <div className="hidden sm:flex gap-8">
           <button
             onClick={() => setLang(lang)}
             className="bg-blue-600 hover:bg-blue-700 px-4 py-1 rounded"
           >
             {lang === "en" ? "EN" : "AR"}
           </button>
+
           <button
+            onClick={toggleTheme}
             className={`${
               theme === "dark"
-                ? "bg-transparent   hover:bg-gray-800"
+                ? "bg-transparent hover:bg-gray-800"
                 : "bg-gray-100 hover:bg-gray-200"
-            }   px-4 py-1 rounded shadow-md`}
-            onClick={toggleTheme}
+            } px-4 py-1 rounded shadow-md`}
           >
             {theme === "light" ? "Light" : "Dark"}
           </button>
         </div>
 
-        {/* Desktop search */}
         <div
           className={`hidden md:flex items-center ${
             theme === "dark" ? "bg-gray-800" : "bg-white"
@@ -126,8 +133,8 @@ export default function Navbar() {
               className={`${
                 theme === "dark"
                   ? "bg-gray-800 hover:bg-gray-900"
-                  : "bg-white hover:bg-gray-100 "
-              }  transition ease-in  px-4 py-1 rounded text-sm`}
+                  : "bg-white hover:bg-gray-100"
+              } transition ease-in px-4 py-1 rounded text-sm`}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +144,7 @@ export default function Navbar() {
                 stroke="currentColor"
                 className={`w-5 h-5 ${
                   theme === "dark" ? "text-gray-300" : "text-gray-900"
-                } `}
+                }`}
               >
                 <path
                   strokeLinecap="round"
@@ -149,7 +156,6 @@ export default function Navbar() {
           </form>
         </div>
 
-        {/* Burger menu button */}
         <button
           className="md:hidden focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -182,44 +188,14 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile menu */}
       {menuOpen && (
         <div
-          className={` md:hidden ${
+          className={`md:hidden ${
             theme === "dark"
-              ? "text-gray-200  bg-gray-800 border-gray-700"
+              ? "text-gray-200 bg-gray-800 border-gray-700"
               : "text-gray-900 bg-white border-gray-200"
-          } px-6 py-4 space-y-4 border-t `}
+          } px-6 py-4 space-y-4 border-t`}
         >
-          <NavLink
-            to="/"
-            end
-            onClick={() => setMenuOpen(false)}
-            className={({ isActive }) =>
-              isActive
-                ? "block text-blue-400 font-semibold"
-                : `${
-                    theme === "dark" ? "text-gray-300" : "text-gray-900"
-                  } block hover:text-blue-400`
-            }
-          >
-            Home
-          </NavLink>
-
-          <NavLink
-            to="/movies"
-            onClick={() => setMenuOpen(false)}
-            className={({ isActive }) =>
-              isActive
-                ? "block text-blue-400 font-semibold"
-                : `${
-                    theme === "dark" ? "text-gray-300" : "text-gray-900"
-                  } block hover:text-blue-400`
-            }
-          >
-            Movies
-          </NavLink>
-
           <form onSubmit={handleSubmit} className="flex items-center gap-2">
             <input
               type="text"
@@ -248,6 +224,17 @@ export default function Navbar() {
               </svg>
             </button>
           </form>
+
+          <button
+            onClick={toggleTheme}
+            className={`w-full ${
+              theme === "dark"
+                ? "bg-transparent border border-gray-700 hover:bg-gray-700"
+                : "bg-gray-100 border border-gray-300 hover:bg-gray-200"
+            } px-4 py-2 rounded shadow-md text-sm`}
+          >
+            {theme === "light" ? "Light" : "Dark"}
+          </button>
         </div>
       )}
     </nav>
