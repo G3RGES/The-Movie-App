@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Input from "./Input";
+import { userRegister } from "../../Services/auth";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../context/theme";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +21,9 @@ const Register = () => {
     passwordError: "",
     confirmPasswordError: "",
   });
+  const { mode: theme } = useContext(ThemeContext);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     if (e.target.name === "name") {
@@ -61,7 +68,7 @@ const Register = () => {
       setErrors({
         ...errors,
         passwordError:
-          e.target.value.length.trim() < 8
+          e.target.value.length < 8
             ? "Password must be at least 8 characters"
             : e.target.value.trim() === " "
             ? "Password cannot be empty"
@@ -107,9 +114,11 @@ const Register = () => {
         password: "",
         confirmPassword: "",
       });
+      userRegister(formData.email, formData.password);
+      navigate("/login");
       console.log(formData);
     } else {
-      console.log("Form is not valid");
+      toast.error("Form is not valid");
     }
   };
 
@@ -117,17 +126,21 @@ const Register = () => {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col items-center justify-center gap-2 mt-5"
+        className={`${
+          theme === "dark" ? " text-gray-50" : "bg-gray-100 text-gray-900"
+        } flex flex-col items-center justify-center gap-2 mt-5 mb-5`}
       >
         <Input
           type="text"
           name="name"
           placeholder="Name"
-          className="w-96 border-1 rounded p-2 outline-0"
+          className={`${
+            theme === "dark" ? "text-gray-100" : ""
+          } w-96 border-1 rounded p-2 outline-0`}
           onChange={handleChange}
           value={formData.name}
         />
-        <div className="text-red-500 text-sm w-96">
+        <div className={`text-red-500 text-sm w-96`}>
           {errors.nameError && <p>{errors.nameError}</p>}
         </div>
 
@@ -135,40 +148,48 @@ const Register = () => {
           type="email"
           name="email"
           placeholder="Email"
-          className="w-96 border-1 rounded p-2 outline-0"
+          className={`${
+            theme === "dark" ? "text-gray-100" : ""
+          }  w-96 border-1 rounded p-2 outline-0`}
           onChange={handleChange}
           value={formData.email}
         />
-        <div className="text-red-500 text-sm w-96">
+        <div className={`text-red-500 text-sm w-96`}>
           {errors.emailError && <p>{errors.emailError}</p>}
         </div>
         <Input
           type="text"
           name="username"
           placeholder="Username"
-          className="w-96 border-1 rounded p-2 outline-0"
+          className={`${
+            theme === "dark" ? "text-gray-100" : ""
+          }  w-96 border-1 rounded p-2 outline-0`}
           onChange={handleChange}
           value={formData.username}
         />
-        <div className="text-red-500 text-sm w-96">
+        <div className={`text-red-500 text-sm w-96`}>
           {errors.usernameError && <p>{errors.usernameError}</p>}
         </div>
         <Input
           type="password"
           name="password"
           placeholder="Password"
-          className="w-96 border-1 rounded p-2 outline-0"
+          className={`${
+            theme === "dark" ? "text-gray-100" : ""
+          }  w-96 border-1 rounded p-2 outline-0`}
           onChange={handleChange}
           value={formData.password}
         />
-        <div className="text-red-500 text-sm w-96">
+        <div className={`text-red-500 text-sm w-96`}>
           {errors.passwordError && <p>{errors.passwordError}</p>}
         </div>
         <Input
           type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
-          className="w-96 border-1 rounded p-2 outline-0"
+          className={`${
+            theme === "dark" ? "text-gray-100" : ""
+          }  w-96 border-1 rounded p-2 outline-0`}
           onChange={handleChange}
           value={formData.confirmPassword}
         />
@@ -182,6 +203,7 @@ const Register = () => {
           Sign Up
         </button>
       </form>
+      <Toaster position="top-center" />
     </>
   );
 };
