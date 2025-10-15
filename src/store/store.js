@@ -4,6 +4,7 @@ import themeReducer from "./themeSlice";
 import LangReducer from "./LangSlice";
 import LoaderSlice from "./LoaderSlice";
 import FavouriteSlice from "./FavouriteSlice";
+import MoviesSlice from "./MoviesSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,5 +12,6 @@ export const store = configureStore({
     lang: LangReducer,
     loader: LoaderSlice,
     favourite: FavouriteSlice,
+    movies: MoviesSlice,
   },
 });
