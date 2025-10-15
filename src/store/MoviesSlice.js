@@ -7,7 +7,7 @@ export const moviesAction = createAsyncThunk(
     const res = await axiosInstance.get(
       `/movie/popular?api_key=d4b6bc723ac291b078823a9b64bd3e08&page=${page}`
     );
-    console.log(res.data.results);
+    // console.log(res.data.results);
 
     return res.data.results;
   }
