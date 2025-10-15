@@ -3,15 +3,18 @@
 import React, { useEffect, useState } from "react";
 // import Movie from "./Movie";
 import {
-  useLoaderData,
+  // useLoaderData,
   useLocation,
   useNavigate,
-  useRouteError,
+  // useRouteError,
 } from "react-router-dom";
 
 import Movie from "./Movie";
-import axiosInstance from "../../AxiosInstance";
+// import axiosInstance from "../../AxiosInstance";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import { moviesAction } from "../../store/MoviesSlice";
 
 const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 const Movies = () => {
@@ -20,7 +23,14 @@ const Movies = () => {
   const navigate = useNavigate();
   const total_pages = 20;
 
-  const moviesData = useLoaderData();
+  // const moviesData = useLoaderData();
+
+  const dispatch = useDispatch();
+  const moviesData = useSelector((state) => state.movies.movies);
+
+  useEffect(() => {
+    dispatch(moviesAction()); // fetch first page // dispatch(moviesAction()); // fetch first page
+  }, [dispatch]);
 
   const location = useLocation();
 
@@ -173,26 +183,26 @@ const Movies = () => {
 // };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const moviesLoader = async ({ request }) => {
-  const url = new URL(request.url);
-  const page = url.searchParams.get("page") || 1;
+// export const moviesLoader = async ({ request }) => {
+//   const url = new URL(request.url);
+//   const page = url.searchParams.get("page") || 1;
 
-  const res = await axiosInstance.get(
-    `/movie/popular?api_key=${API_KEY}&page=${page}`
-  );
-  return res.data.results;
-};
+//   const res = await axiosInstance.get(
+//     `/movie/popular?api_key=${API_KEY}&page=${page}`
+//   );
+//   return res.data.results;
+// };
 
-export const ErrorBoundary = () => {
-  const error = useRouteError();
+// export const ErrorBoundary = () => {
+//   const error = useRouteError();
 
-  return (
-    <div className="container mx-auto p-6 mt-10 bg-[#132440] text-white shadow-md rounded-xl">
-      <h1 className="text-4xl font-bold mb-8 text-center tracking-tight">
-        Error: {error.status} - {error.statusText}
-      </h1>
-    </div>
-  );
-};
+//   return (
+//     <div className="container mx-auto p-6 mt-10 bg-[#132440] text-white shadow-md rounded-xl">
+//       <h1 className="text-4xl font-bold mb-8 text-center tracking-tight">
+//         Error: {error.status} - {error.statusText}
+//       </h1>
+//     </div>
+//   );
+// };
 
 export default Movies;
