@@ -2,10 +2,8 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Nav/Navbar";
 
-import Movies, {
-  ErrorBoundary,
-  moviesLoader,
-} from "./Components/Movies/Movies";
+import Movies from // moviesLoader, // ErrorBoundary,
+"./Components/Movies/Movies";
 import MovieDetails from "./Components/Movies/MovieDetails";
 import SearchResults from "./Components/Search/SearchResults";
 
@@ -28,14 +26,14 @@ const App = () => {
         {
           path: "movies",
           element: <Movies />,
-          loader: moviesLoader,
-          errorElement: <ErrorBoundary />,
+          // loader: moviesLoader,
+          // errorElement: <ErrorBoundary />,
         },
         {
           path: "tv",
           element: <TvShows />,
           loader: tvShowsLoader,
-          errorElement: <ErrorBoundary />,
+          // errorElement: <ErrorBoundary />,
         },
         { path: "favourites", element: <Favourite /> },
         { path: "tv/:id", element: <TvShowDetails /> },
