@@ -4,6 +4,7 @@ import { userLogin } from "../../Services/auth";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../../context/theme";
+// import { auth } from "../../Services/Firebase";
 
 const Login = () => {
   const [loginInputs, setLoginInputs] = useState({
@@ -54,7 +55,7 @@ const Login = () => {
     // console.log(loginInputs);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!inputsError.emailError && !inputsError.passwordError) {
@@ -62,9 +63,12 @@ const Login = () => {
         email: "",
         password: "",
       });
-      userLogin(loginInputs.email, loginInputs.password);
+      //   userLogin(auth, loginInputs.email, loginInputs.password);
+      const user = await userLogin(loginInputs.email, loginInputs.password);
       navigate("/");
-      console.log(loginInputs);
+      //   console.log(user.user.accessToken);
+      const userToken = user.user.accessToken;
+      localStorage.setItem("token", userToken);
     } else {
       toast.error("Form is not valid");
     }
