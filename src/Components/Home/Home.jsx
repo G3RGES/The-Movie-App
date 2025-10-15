@@ -103,7 +103,7 @@ export default function Home() {
 function Section({ title, movies }) {
   return (
     <div className="px-8 py-10">
-      <h2 className="text-2xl font-semibold mb-5">{title}</h2>
+      <h2 className="text-2xl  font-semibold mb-5">{title}</h2>
       <div className="relative">
         {/* gradient edges */}
         <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-zinc-950 to-transparent z-10"></div>
@@ -121,7 +121,7 @@ function Section({ title, movies }) {
                 className="w-full h-72 object-cover"
               />
               <div className="p-3">
-                <h2 className="text-sm font-semibold truncate">
+                <h2 className="text-sm font-semibold truncate text-white">
                   {movie.title}
                 </h2>
                 <p className="text-xs text-zinc-400 mt-1">
