@@ -1,28 +1,21 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { changeLang } from "../../store/LangSlice";
 import { ThemeContext } from "../../context/theme";
-import { auth } from "../../Services/Firebase";
 import { userLogout } from "../../Services/auth";
 
 export default function Navbar() {
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { mode: theme, toggleThemeMode } = useContext(ThemeContext);
   const lang = useSelector((state) => state.lang.lang);
 
-  // Listen to auth state changes
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
+  // Check if user is logged in - adjust this based on your auth state structure
+  // const isLoggedIn = useSelector((state) => state.auth?.isLoggedIn || false);
 
   const setLang = () => {
     dispatch(changeLang(lang === "en" ? "ar" : "en"));
@@ -32,10 +25,14 @@ export default function Navbar() {
     toggleThemeMode();
   };
 
-  const handleLogout = () => {
-    // Add your logout logic here
-    userLogout();
-    setMenuOpen(false);
+  const userToken = localStorage.getItem("token");
+
+  const handleLogout = async () => {
+    // Put your logout logic here
+    // console.log("Logout clicked");
+    await userLogout();
+    localStorage.removeItem("token");
+    navigate("/");
   };
 
   const handleSubmit = (e) => {
@@ -50,7 +47,7 @@ export default function Navbar() {
     <nav
       className={`${
         theme === "dark" ? "bg-gray-900 text-white" : "bg-white text-gray-900"
-      } shadow-md fixed w-full top-0 z-50`}
+      } shadow-md fixed  w-full top-0 z-50`}
     >
       <div className="mx-auto px-6 py-4 flex items-center justify-between">
         <h1 className="text-2xl font-bold tracking-wide text-blue-500">
@@ -111,10 +108,10 @@ export default function Navbar() {
             Favourites
           </NavLink>
 
-          {user ? (
+          {userToken ? (
             <button
               onClick={handleLogout}
-              className="text-gray-900 font-semibold shadow-md bg-white px-2 py-1 rounded-md hover:text-gray-600 transition"
+              className="text-red-400 hover:text-red-500 transition font-semibold"
             >
               Logout
             </button>
