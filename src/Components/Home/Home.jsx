@@ -53,9 +53,9 @@ export default function Home() {
         theme === "dark"
           ? "bg-gray-900 text-white"
           : "text-gray-300 bg-gray-100"
-      } min-h-screen`}
+      } min-h-screen rounded-xl`}
     >
-      <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
+      <div className="rounded-md flex items-center gap-2 text-gray-300 mb-8 text-sm">
         <span className="text-blue-400 font-medium truncate max-w-[200px]">
           Home
         </span>{" "}
@@ -63,12 +63,12 @@ export default function Home() {
       </div>
       {heroMovie && (
         <div
-          className="relative h-[80vh] flex items-end justify-start bg-cover bg-center transition-all duration-700"
+          className="relative rounded-2xl h-[80vh] flex items-end justify-start bg-cover bg-center transition-all duration-700"
           style={{
             backgroundImage: `url(https://image.tmdb.org/t/p/original${heroMovie.backdrop_path})`,
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-black/40" />
+          <div className="rounded-2xl absolute inset-0 bg-gradient-to-t from-black/80 to-black/40" />
           <div className="relative p-10 max-w-2xl z-10">
             <h1 className="text-5xl font-bold mb-4 leading-tight">
               {heroMovie.title}
