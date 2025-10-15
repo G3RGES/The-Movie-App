@@ -2,8 +2,7 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Nav/Navbar";
 
-import Movies from // moviesLoader, // ErrorBoundary,
-"./Components/Movies/Movies";
+import Movies from "./Components/Movies/Movies"; // moviesLoader, // ErrorBoundary,
 import MovieDetails from "./Components/Movies/MovieDetails";
 import SearchResults from "./Components/Search/SearchResults";
 
@@ -15,6 +14,11 @@ import TvShows, { tvShowsLoader } from "./Components/Tv/TvShows";
 import TvShowDetails from "./Components/Tv/TvShowDetails";
 import MainComponent from "./Components/MainComponent/MainComponent";
 import Favourite from "./Components/Favourite/Favourite";
+
+import Login from "./Components/Form/Login";
+import Register from "./Components/Form/Register";
+import { ThemeContext } from "./context/theme";
+import { useContext } from "react";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -35,6 +39,8 @@ const App = () => {
           loader: tvShowsLoader,
           // errorElement: <ErrorBoundary />,
         },
+        { path: "register", element: <Register /> },
+        { path: "login", element: <Login /> },
         { path: "favourites", element: <Favourite /> },
         { path: "tv/:id", element: <TvShowDetails /> },
         { path: "movies/:id", element: <MovieDetails /> },
@@ -44,8 +50,14 @@ const App = () => {
     { path: "*", element: <NotFound /> },
   ]);
 
+  const { mode: theme } = useContext(ThemeContext);
+
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+    <div
+      className={`${
+        theme === "dark" ? "bg-gray-900" : "bg-gray-100"
+      } min-h-screen rounded-3xl`}
+    >
       {/* <div
       className={`dark:bg-gray-900 dark:text-gray-100 bg-gray-100 text-gray-900 min-h-screen`}
     > */}
