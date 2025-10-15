@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Input from "./Input";
+import { userLogin } from "../../Services/auth";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../../context/theme";
 
 const Login = () => {
   const [loginInputs, setLoginInputs] = useState({
@@ -11,6 +15,9 @@ const Login = () => {
     emailError: "",
     passwordError: "",
   });
+
+  const navigate = useNavigate();
+  const { mode: theme } = useContext(ThemeContext);
 
   const handleChange = (e) => {
     setLoginInputs({
@@ -55,33 +62,45 @@ const Login = () => {
         email: "",
         password: "",
       });
+      userLogin(loginInputs.email, loginInputs.password);
+      navigate("/");
       console.log(loginInputs);
     } else {
-      console.log("Form is not valid");
+      toast.error("Form is not valid");
     }
   };
 
   return (
-    <div className="container flex flex-col justify-center items-center mt-2">
-      <div className="flex flex-col gap-4 justify-center items-center">
-        <form action="" className="flex flex-col gap-2" onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
+    <div className={`container flex flex-col justify-center items-center mt-2`}>
+      <div className={`flex flex-col gap-4 justify-center items-center`}>
+        <form
+          action=""
+          className={`${
+            theme === "dark" ? " text-gray-50" : "bg-gray-100 text-gray-900"
+          } flex flex-col gap-2`}
+          onSubmit={handleSubmit}
+        >
+          <label htmlFor="email" className={``}>
+            Email
+          </label>
           <Input
             type="email"
             name="email"
             placeholder="Email"
             value={loginInputs.email}
             onChange={handleChange}
-            className="border p-2 rounded outline-0"
+            className={`border p-2 rounded outline-0`}
           />
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className={``}>
+            Password
+          </label>
           <Input
             type="password"
             name="password"
             placeholder="Password"
             value={loginInputs.password}
             onChange={handleChange}
-            className="border p-2 rounded outline-0"
+            className={`border p-2 rounded outline-0`}
           />
           <p className="text-red-500 font-medium">{inputsError.emailError}</p>{" "}
           <p className="text-red-500 font-medium">
@@ -90,6 +109,7 @@ const Login = () => {
           <button className="bg-blue-500 text-white p-2 rounded">Login</button>
         </form>
       </div>
+      <Toaster position="top-center" />
     </div>
   );
 };
