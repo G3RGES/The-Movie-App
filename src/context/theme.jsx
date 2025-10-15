@@ -9,14 +9,14 @@ export const ThemeProvider = ({ children }) => {
     setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
   };
 
-  const setThemeMode = (newMode) => {
-    setMode(newMode);
-  };
+  // const setThemeMode = (newMode) => {
+  //   setMode(newMode);
+  // };
 
   const value = {
     mode,
     toggleThemeMode,
-    setThemeMode,
+    // setThemeMode,
   };
 
   return (
