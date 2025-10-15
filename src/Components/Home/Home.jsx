@@ -50,7 +50,7 @@ export default function Home() {
       className={`${
         theme === "dark"
           ? "bg-gray-900 text-white"
-          : "text-gray-900 bg-gray-100"
+          : "text-gray-300 bg-gray-100"
       } min-h-screen`}
     >
       <div className="flex items-center gap-2 text-gray-300 mb-8 text-sm">
@@ -103,7 +103,7 @@ export default function Home() {
 function Section({ title, movies }) {
   return (
     <div className="px-8 py-10">
-      <h2 className="text-2xl  font-semibold mb-5">{title}</h2>
+      <h2 className="text-2xl  font-semibold  mb-5">{title}</h2>
       <div className="relative">
         {/* gradient edges */}
         <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-zinc-950 to-transparent z-10"></div>
