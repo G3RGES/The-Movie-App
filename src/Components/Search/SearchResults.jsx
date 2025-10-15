@@ -1,8 +1,9 @@
 // import axios from "axios";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axiosInstance from "../../AxiosInstance";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { ThemeContext } from "../../context/theme";
 
 export default function SearchResults() {
   const { query } = useParams();
@@ -16,7 +17,8 @@ export default function SearchResults() {
       .catch((err) => console.log(err));
   }, [query]);
 
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
+  const { mode: theme } = useContext(ThemeContext);
 
   const handleBackToMovies = () => navigate(`/movies`);
   const handleback = () => navigate(-1);

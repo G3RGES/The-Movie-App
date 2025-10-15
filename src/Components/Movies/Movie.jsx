@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { addFavourite, removeFavourite } from "../../store/FavouriteSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { ThemeContext } from "../../context/theme";
 
 const Movie = ({ id, title, overview, poster_path }) => {
   const navigate = useNavigate();
   const favourite = useSelector((state) => state.favourite);
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
+  const { mode: theme } = useContext(ThemeContext);
 
   const isFavourite = favourite.movies.some((movie) => movie.id === id);
 

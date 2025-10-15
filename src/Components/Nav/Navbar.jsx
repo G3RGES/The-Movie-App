@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { changeLang } from "../../store/LangSlice";
-import { toggleThemeMode } from "../../store/themeSlice";
+// import { toggleThemeMode } from "../../store/themeSlice";
+import { ThemeContext } from "../../context/theme";
 
 export default function Navbar() {
   const [query, setQuery] = useState("");
@@ -10,7 +11,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
+  const { mode: theme, toggleThemeMode } = useContext(ThemeContext);
   const lang = useSelector((state) => state.lang.lang);
 
   const setLang = () => {
@@ -18,7 +20,8 @@ export default function Navbar() {
   };
 
   const toggleTheme = () => {
-    dispatch(toggleThemeMode());
+    // dispatch(toggleThemeMode());
+    toggleThemeMode();
   };
 
   const handleSubmit = (e) => {
@@ -117,7 +120,7 @@ export default function Navbar() {
 
         <div
           className={`hidden md:flex items-center ${
-            theme === "dark" ? "bg-gray-800" : "bg-white"
+            theme === "dark" ? "bg-gray-800" : "bg-white text-gray-900"
           } shadow-md rounded-lg px-3 py-1`}
         >
           <form onSubmit={handleSubmit} className="flex items-center gap-2">
@@ -126,7 +129,10 @@ export default function Navbar() {
               placeholder="Search..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="bg-transparent outline-none text-sm text-gray-300 placeholder-gray-500 w-32 focus:w-48 transition-all"
+              className={`bg-transparent outline-none text-sm ${
+                theme === "dark" ? "text-white" : "text-gray-900"
+              }
+               placeholder-gray-500 w-32 focus:w-48 transition-all`}
             />
             <button
               type="submit"

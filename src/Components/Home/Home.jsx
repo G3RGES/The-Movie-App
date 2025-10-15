@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // import axios from "axios";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../AxiosInstance";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { ThemeContext } from "../../context/theme";
 
 export default function Home() {
   const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
@@ -11,7 +12,8 @@ export default function Home() {
   const [upcoming, setUpcoming] = useState([]);
   const [heroIndex, setHeroIndex] = useState(0);
 
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
+  const { mode: theme } = useContext(ThemeContext);
 
   // Fetch data once
   useEffect(() => {

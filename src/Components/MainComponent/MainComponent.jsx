@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../Nav/Navbar";
 import { Outlet } from "react-router-dom";
 // import { toggleThemeMode } from "../../store/themeSlice";
 
 // import { useSelector, useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { ThemeContext } from "../../context/theme";
 // import { changeLang } from "../../store/LangSlice";
 
 const MainComponent = () => {
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
+  const { mode: theme } = useContext(ThemeContext);
   const lang = useSelector((state) => state.lang.lang);
 
   console.log(theme);

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFavourite } from "../../store/FavouriteSlice";
+import { ThemeContext } from "../../context/theme";
 
 const Favourites = () => {
   const dispatch = useDispatch();
   const favourites = useSelector((state) => state.favourite.movies);
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
+  const { mode: theme } = useContext(ThemeContext);
 
   const handleRemove = (id) => {
     dispatch(removeFavourite(id));

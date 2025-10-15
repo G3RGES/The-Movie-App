@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   useLoaderData,
   useLocation,
@@ -8,7 +8,8 @@ import {
 
 import axiosInstance from "../../AxiosInstance";
 import TvShow from "./TvShow";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { ThemeContext } from "../../context/theme";
 
 const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 
@@ -28,7 +29,8 @@ const TvShows = () => {
     navigate(`?page=${page}`, { replace: false });
   }, [page, navigate]);
 
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
+  const { mode: theme } = useContext(ThemeContext);
 
   const nextPage = () => {
     if (page < total_pages) setPage((prev) => prev + 1);

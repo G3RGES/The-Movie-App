@@ -1,6 +1,6 @@
 // import axios from "axios";
 // import React, { useEffect, useState } from "react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import Movie from "./Movie";
 import {
   // useLoaderData,
@@ -15,13 +15,15 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import { moviesAction } from "../../store/MoviesSlice";
+import { ThemeContext } from "../../context/theme";
 
-const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
+// const API_KEY = "d4b6bc723ac291b078823a9b64bd3e08";
 const Movies = () => {
   // const [movies, setMovies] = useState([]);
   // const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const total_pages = 20;
+  const { mode: theme } = useContext(ThemeContext);
 
   // const moviesData = useLoaderData();
 
@@ -40,7 +42,7 @@ const Movies = () => {
     navigate(`?page=${page}`, { replace: false });
   }, [page, navigate, dispatch]);
 
-  const theme = useSelector((state) => state.theme.mode);
+  // const theme = useSelector((state) => state.theme.mode);
   const loader = useSelector((state) => state.loader.isLoading);
 
   // useEffect(() => {
