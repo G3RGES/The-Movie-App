@@ -1,27 +1,41 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { changeLang } from "../../store/LangSlice";
-// import { toggleThemeMode } from "../../store/themeSlice";
 import { ThemeContext } from "../../context/theme";
+import { auth } from "../../Services/Firebase";
+import { userLogout } from "../../Services/auth";
 
 export default function Navbar() {
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // const theme = useSelector((state) => state.theme.mode);
   const { mode: theme, toggleThemeMode } = useContext(ThemeContext);
   const lang = useSelector((state) => state.lang.lang);
+
+  // Listen to auth state changes
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const setLang = () => {
     dispatch(changeLang(lang === "en" ? "ar" : "en"));
   };
 
   const toggleTheme = () => {
-    // dispatch(toggleThemeMode());
     toggleThemeMode();
+  };
+
+  const handleLogout = () => {
+    // Add your logout logic here
+    userLogout();
+    setMenuOpen(false);
   };
 
   const handleSubmit = (e) => {
@@ -96,6 +110,41 @@ export default function Navbar() {
           >
             Favourites
           </NavLink>
+
+          {user ? (
+            <button
+              onClick={handleLogout}
+              className="text-gray-900 font-semibold shadow-md bg-white px-2 py-1 rounded-md hover:text-gray-600 transition"
+            >
+              Logout
+            </button>
+          ) : (
+            <>
+              <NavLink
+                to="/register"
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-gray-900 font-semibold shadow-md bg-white px-2 py-1 rounded-md pb-1"
+                    : "hover:text-gray-400 transition shadow-md bg-transparent px-2 py-1 rounded-md"
+                }
+              >
+                Register
+              </NavLink>
+
+              <NavLink
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-gray-900 font-semibold shadow-md bg-white px-2 py-1 rounded-md pb-1"
+                    : "hover:text-gray-400 transition shadow-md bg-transparent px-2 py-1 rounded-md"
+                }
+              >
+                Login
+              </NavLink>
+            </>
+          )}
         </div>
 
         <div className="hidden sm:flex gap-8">
