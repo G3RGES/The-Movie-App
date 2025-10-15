@@ -90,7 +90,7 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // const { name, email, username, password, confirmPassword } = formData;
@@ -114,7 +114,7 @@ const Register = () => {
         password: "",
         confirmPassword: "",
       });
-      userRegister(formData.email, formData.password);
+      await userRegister(formData.email, formData.password);
       navigate("/login");
       console.log(formData);
     } else {
